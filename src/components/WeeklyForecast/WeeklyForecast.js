@@ -7,8 +7,10 @@ import ErrorBox from '../Reusable/ErrorBox';
 import UnfedForecastItem from './UnfedForecastItem';
 import DayWeatherDetails from './DayWeatherDetails';
 import Layout from '../Reusable/Layout';
+import { useTranslation } from 'react-i18next';
 
 const WeeklyForecast = ({ data }) => {
+  const { t } = useTranslation();
   const forecastDays = getWeekDays();
 
   const noDataProvided =
@@ -51,9 +53,9 @@ const WeeklyForecast = ({ data }) => {
               }}
             >
               <DayWeatherDetails
-                day={forecastDays[idx]}
+                day={t(forecastDays[idx])}
                 src={weatherIcon(`${item.icon}`)}
-                description={item.description}
+                description={t(item.description)}
               />
 
               <Grid
@@ -127,7 +129,7 @@ const WeeklyForecast = ({ data }) => {
 
   return (
     <Layout
-      title="WEEKLY FORECAST"
+      title={t('WEEKLY-FORECAST')}
       content={content}
       mb=".8rem"
       sx={{

@@ -1,3 +1,5 @@
+
+
 export function groupBy(key) {
   return function group(array) {
     return array.reduce((acc, obj) => {
@@ -37,7 +39,8 @@ export const descriptionToIconName = (desc, descriptions_list) => {
   return iconName.icon || 'unknown';
 };
 
-export const getWeekForecastWeather = (response, descriptions_list) => {
+
+export const getWeekForecastWeather = (response, descriptions_list, language) => {
   let foreacast_data = [];
   let descriptions_data = [];
 
@@ -98,13 +101,14 @@ export const getWeekForecastWeather = (response, descriptions_list) => {
       humidity: getAverage(dayHumidityList),
       wind: getAverage(dayWindList, false),
       clouds: getAverage(dayCloudsList),
-      description: dayDescList[idx],
+      description: dayDescList[idx].replaceAll(' ', '-'),
       icon: descriptionToIconName(dayDescList[idx], descriptions_list),
     });
   });
 
   return dayAvgsList;
 };
+
 
 export const getTodayForecastWeather = (
   response,

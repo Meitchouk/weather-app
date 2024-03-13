@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, Grid, Link, SvgIcon, Typography } from '@mui/material';
+import { Box, Container, Grid, SvgIcon, Typography } from '@mui/material';
 import Search from './components/Search/Search';
 import WeeklyForecast from './components/WeeklyForecast/WeeklyForecast';
 import TodayWeather from './components/TodayWeather/TodayWeather';
@@ -15,10 +15,11 @@ import {
   getTodayForecastWeather,
   getWeekForecastWeather,
 } from './utilities/DataUtils';
-import { IconButton } from '@mui/material';
-
+import LanguageSwitcher from './components/LocaleSwitcher/LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t } = useTranslation(); 
   const [todayWeather, setTodayWeather] = useState(null),
     [todayForecast, setTodayForecast] = useState([]),
     [weekForecast, setWeekForecast] = useState(null),
@@ -84,7 +85,7 @@ function App() {
   if (todayWeather && todayForecast && weekForecast) {
     appContent = (
       <React.Fragment>
-        <Grid item xs={12} md={todayWeather ? 6 : 12}>
+        <Grid item xs={12} md={6}>
           <Grid item xs={12}>
             <TodayWeather data={todayWeather} forecastList={todayForecast} />
           </Grid>
@@ -128,7 +129,7 @@ function App() {
               fontFamily: 'Poppins',
             }}
           >
-            Loading...
+            {t('LOADING')}
           </Typography>
         </LoadingBox>
       </Box>
@@ -175,25 +176,7 @@ function App() {
               src={Logo}
             />
             <UTCDatetime />
-            <Link
-              href="https://github.com/Amin-Awinti"
-              target="_blank"
-              underline="none"
-              sx={{ display: 'flex' }}
-            ></Link>
-
-            <Link
-              target="_blank"
-              underline="none"
-              sx={{ display: 'flex' }}
-            >
-              <IconButton
-                size="small"
-                sx={{ ml: 0.5 }}
-                aria-haspopup="true"
-              >
-              </IconButton>
-            </Link>
+            <LanguageSwitcher/>
           </Box>
           <Search onSearchChange={searchChangeHandler} />
         </Grid>

@@ -7,10 +7,15 @@ import CityDateDetail from './CityDateDetail';
 import TemperatureWeatherDetail from './TemperatureWeatherDetail';
 import WeatherIconDetail from './WeatherIconDetail';
 import Layout from '../../Reusable/Layout';
+import { useTranslation } from 'react-i18next';
+
 
 const dayMonth = getDayMonthFromDate();
 
 const Details = ({ data }) => {
+
+  const { t } = useTranslation();
+
   const noDataProvided =
     !data || Object.keys(data).length === 0 || data.cod === '404';
 
@@ -37,7 +42,7 @@ const Details = ({ data }) => {
         >
           <TemperatureWeatherDetail
             temperature={data.main.temp}
-            description={data.weather[0].description}
+            description={t(data.weather[0].description.replaceAll(' ', '-'))}
           />
         </Grid>
         <Grid
@@ -54,8 +59,8 @@ const Details = ({ data }) => {
         </Grid>
       </>
     );
-
-  return <Layout title="CURRENT WEATHER" content={content} />;
+    
+  return <Layout title={t('CURRENT-WEATHER')} content={content} />;
 };
 
 export default Details;

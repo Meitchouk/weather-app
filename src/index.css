@@ -5,6 +5,9 @@ body {
   font-family: 'Poppins', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   min-height: 100vh;
   background: linear-gradient(to right top, #0f2027, #203a43, #2c5364);
 }

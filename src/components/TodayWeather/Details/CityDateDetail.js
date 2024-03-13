@@ -1,7 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 
 const CityDateDetail = (props) => {
+
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -39,7 +44,7 @@ const CityDateDetail = (props) => {
           fontFamily: 'Roboto Condensed',
         }}
       >
-        Today {props.date}
+        {t('TODAY')} {props.date}
       </Typography>
     </Box>
   );

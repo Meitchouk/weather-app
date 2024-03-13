@@ -3,8 +3,13 @@ import { Grid, Typography } from '@mui/material';
 import DailyForecastItem from './DailyForecastItem';
 import ErrorBox from '../../Reusable/ErrorBox';
 import Layout from '../../Reusable/Layout';
+import { useTranslation } from 'react-i18next';
+
 
 const DailyForecast = ({ data, forecastList }) => {
+
+  const { t } = useTranslation();
+
   const noDataProvided =
     !data ||
     !forecastList ||
@@ -15,6 +20,8 @@ const DailyForecast = ({ data, forecastList }) => {
   let subHeader;
 
   if (!noDataProvided && forecastList.length > 0)
+  {
+    let forecastKey = forecastList.length === 1 ? 'available-forecast' : 'available-forecasts';
     subHeader = (
       <Typography
         variant="h5"
@@ -28,11 +35,10 @@ const DailyForecast = ({ data, forecastList }) => {
           marginBottom: '1rem',
         }}
       >
-        {forecastList.length === 1
-          ? '1 available forecast'
-          : `${forecastList.length} available forecasts`}
+        {t(forecastKey)}
       </Typography>
     );
+  }
 
   let content;
 
@@ -82,7 +88,7 @@ const DailyForecast = ({ data, forecastList }) => {
 
   return (
     <Layout
-      title="TODAY'S FORECAST"
+      title={t('TODAYS-FORECAST')}
       content={content}
       sectionSubHeader={subHeader}
       sx={{ marginTop: '2.9rem' }}
